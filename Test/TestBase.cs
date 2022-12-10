@@ -27,10 +27,15 @@ public class TestBase
     
     public void CreateList(ListData listData)
     {
-        driver.FindElement(By.CssSelector(".hoverSection:nth-child(1) .add-icon use")).Click();
         driver.FindElement(By.Id("edit-project-name")).Click();
         driver.FindElement(By.Id("edit-project-name")).SendKeys(listData.Name);
         driver.FindElement(By.CssSelector(".ap-button-primary")).Click();
+        Thread.Sleep(2000);
+    }
+
+    public void OpenCreateListForm()
+    {
+        driver.FindElement(By.CssSelector(".hoverSection:nth-child(1) .add-icon use")).Click();
     }
 
     public void Login(AccountData account)
