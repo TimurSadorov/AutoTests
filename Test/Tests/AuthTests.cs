@@ -1,6 +1,7 @@
 using NUnit.Framework;
+using Test.Model;
 
-namespace Test;
+namespace Test.Tests;
 
 [TestFixture]
 public class AuthTests: TestBase    
@@ -10,7 +11,7 @@ public class AuthTests: TestBase
     {
         var account = new AccountData("sadorov2001@mail.ru", "hk21002001");
         
-        OpenHomePage();
-        Login(account);
+        App.NavigationHelper.OpenHomePage();
+        App.AuthHelper.Login(account);
     }
 }

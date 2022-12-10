@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
+using Test.Model;
 
-namespace Test;
+namespace Test.Tests;
 
 [TestFixture]
 public class CreateListTests: TestBase    
@@ -9,10 +10,11 @@ public class CreateListTests: TestBase
     public void CreateList()
     {
         var account = new AccountData("sadorov2001@mail.ru", "hk21002001");
-        OpenHomePage();
-        Login(account);
+        App.NavigationHelper.OpenHomePage();
+        App.AuthHelper.Login(account);
+        
         var list = new ListData($"name_{Guid.NewGuid()}");
-        OpenCreateListForm();
-        CreateList(list);
+        App.NavigationHelper.OpenCreateListForm();
+        App.ListHelper.CreateList(list);
     }
 }
