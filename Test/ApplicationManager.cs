@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using Test.Configuration;
 using Test.Helpers;
 
 namespace Test;
@@ -19,7 +20,7 @@ public class ApplicationManager
     private ApplicationManager()
     {
         _driver = new ChromeDriver();
-        _baseUrl = "https://ticktick.com/";
+        _baseUrl = Settings.BaseUri;
         
         _navigationHelper = new NavigationHelper(_driver, _baseUrl);
         _authHelper = new LoginHelper(_driver);

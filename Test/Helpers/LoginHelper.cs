@@ -11,6 +11,11 @@ public class LoginHelper: HelperBase
 
     public void Login(AccountData account)
     {
+        if (IsLoggedIn())
+        {
+            return;
+        }
+
         Driver.FindElement(By.LinkText("Войти")).Click();
         Driver.FindElement(By.Id("emailOrPhone")).SendKeys(account.Email);
         Driver.FindElement(By.Id("password")).Click();
@@ -19,7 +24,19 @@ public class LoginHelper: HelperBase
         Thread.Sleep(10000);
     }
     
-    public bool IsLogin()
+    public void Logout()
+    {
+        if (!IsLoggedIn())
+        {
+            return;
+        }
+
+        Driver.FindElement(By.Id("tl-bar-user")).Click();
+        Driver.FindElement(By.LinkText("Sign Out")).Click();
+        Thread.Sleep(2000);
+    }
+    
+    public bool IsLoggedIn()
     { 
         return Driver.FindElements(By.Id("tl-bar-user")).Any();
     }

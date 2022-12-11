@@ -5,17 +5,25 @@ using Test.Model;
 namespace Test.Tests;
 
 [TestFixture]
-public class TaskTests : TestBase
+public class TaskTests : AuthBase
 {
+    private ListData _listData = null!;
+    
     [OneTimeSetUp]
-    public void SetUpTests()
+    public void OneTimeSetUpTaskTests()
     {
-        var listData = new ListData($"name_{Guid.NewGuid()}");
-        
-        App.NavigationHelper.OpenCreateListForm();
-        App.ListHelper.CreateList(listData);
+        _listData = new ListData($"name_{Guid.NewGuid()}");
 
-        App.NavigationHelper.OpenList(listData.Name);
+        App.NavigationHelper.OpenCreateListForm();
+        App.ListHelper.CreateList(_listData);
+
+        App.NavigationHelper.OpenList(_listData.Name);
+    }
+    
+    [SetUp]
+    public void SetUpTaskTests()
+    {
+        App.NavigationHelper.OpenList(_listData.Name);
     }
     
     [Test]

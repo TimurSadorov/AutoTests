@@ -5,7 +5,7 @@ using Test.Model;
 namespace Test.Tests;
 
 [TestFixture]
-public class CreateListTests: TestBase    
+public class CreateListTests: AuthBase    
 {
     [Test]
     [TestCaseSource(nameof(GenerateListData))]
