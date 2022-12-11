@@ -11,6 +11,11 @@ public class LoginHelper: HelperBase
 
     public void Login(AccountData account)
     {
+        if (IsLogin())
+        {
+            return;
+        }
+        
         Driver.FindElement(By.LinkText("Войти")).Click();
         Driver.FindElement(By.Id("emailOrPhone")).SendKeys(account.Email);
         Driver.FindElement(By.Id("password")).Click();
