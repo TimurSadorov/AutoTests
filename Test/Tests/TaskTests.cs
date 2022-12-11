@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Text.Json;
+using NUnit.Framework;
 using Test.Model;
 
 namespace Test.Tests;
@@ -18,9 +19,9 @@ public class TaskTests : TestBase
     }
     
     [Test]
-    public void CreateTask()
+    [TestCaseSource(nameof(GenerateTaskData))]
+    public void CreateTask(TaskData taskData)
     {
-        var taskData = new TaskData(Guid.NewGuid().ToString());
         App.TaskHelper.AddTask(taskData);
         
         Assert.True(App.TaskHelper.HasTask(taskData));
@@ -37,5 +38,13 @@ public class TaskTests : TestBase
 
         var changedTask = new TaskData(newName);
         Assert.True(App.TaskHelper.HasTask(changedTask));
+    }
+    
+    private static IEnumerable<TaskData> GenerateTaskData()
+    {
+        var json = File.ReadAllText( 
+            @"C:\Programming\Development\Repositories\AutoTests\Generator\Data\tasks.json");
+        return JsonSerializer.Deserialize<List<TaskData>>(json)
+               ?? throw new AggregateException("Can't get tasks");
     }
 }

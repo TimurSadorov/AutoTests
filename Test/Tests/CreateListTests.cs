@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Text.Json;
+using NUnit.Framework;
 using Test.Model;
 
 namespace Test.Tests;
@@ -7,12 +8,20 @@ namespace Test.Tests;
 public class CreateListTests: TestBase    
 {
     [Test]
-    public void CreateList()
+    [TestCaseSource(nameof(GenerateListData))]
+    public void CreateList(ListData listData)
     {
-        var list = new ListData($"name_{Guid.NewGuid()}");
         App.NavigationHelper.OpenCreateListForm();
-        App.ListHelper.CreateList(list);
+        App.ListHelper.CreateList(listData);
         
-        Assert.True(App.ListHelper.HasList(list));
+        Assert.True(App.ListHelper.HasList(listData));
+    }
+    
+    private static IEnumerable<ListData> GenerateListData()
+    {
+        var json = File.ReadAllText( 
+            @"C:\Programming\Development\Repositories\AutoTests\Generator\Data\lists.json");
+        return JsonSerializer.Deserialize<List<ListData>>(json)
+               ?? throw new AggregateException("Can't get lists");
     }
 }
