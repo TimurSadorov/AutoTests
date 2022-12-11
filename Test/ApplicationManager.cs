@@ -12,8 +12,11 @@ public class ApplicationManager
     private readonly NavigationHelper _navigationHelper;
     private readonly LoginHelper _authHelper;
     private readonly ListHelper _listHelper;
+    private readonly TaskHelper _taskHelper;
+    
+    public static readonly ApplicationManager App = new();
 
-    public ApplicationManager()
+    private ApplicationManager()
     {
         _driver = new ChromeDriver();
         _baseUrl = "https://ticktick.com/";
@@ -21,12 +24,14 @@ public class ApplicationManager
         _navigationHelper = new NavigationHelper(_driver, _baseUrl);
         _authHelper = new LoginHelper(_driver);
         _listHelper = new ListHelper(_driver);
+        _taskHelper = new TaskHelper(_driver);
     }
 
     public NavigationHelper NavigationHelper => _navigationHelper;
     public LoginHelper AuthHelper => _authHelper;
     public ListHelper ListHelper => _listHelper;
-    
+    public TaskHelper TaskHelper => _taskHelper;
+
     public void Stop()
     {
         _driver.Quit();

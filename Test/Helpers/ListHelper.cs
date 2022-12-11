@@ -16,4 +16,16 @@ public class ListHelper: HelperBase
         Driver.FindElement(By.CssSelector(".ap-button-primary")).Click();
         Thread.Sleep(2000);
     }
+
+    public bool HasList(ListData listData)
+    {
+        var lists = GetLists();
+        return lists.FindElements(By.ClassName("project-list-view-item-button"))
+            .Any(element => element.Text == listData.Name);
+    }
+
+    private IWebElement GetLists()
+    {
+        return Driver.FindElement(By.Id("project-ul"));
+    }
 }

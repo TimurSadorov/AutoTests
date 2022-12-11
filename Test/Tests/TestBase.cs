@@ -6,15 +6,9 @@ public class TestBase
 {
     protected ApplicationManager App;
 
-    [SetUp]
+    [OneTimeSetUp]
     public void SetUp()
     {
-        App = new ApplicationManager();
-    }
-
-    [TearDown]
-    protected void TearDown()
-    {
-        App.Stop();
+        App = ApplicationManager.App;
     }
 }

@@ -16,6 +16,11 @@ public class LoginHelper: HelperBase
         Driver.FindElement(By.Id("password")).Click();
         Driver.FindElement(By.Id("password")).SendKeys(account.Password);
         Driver.FindElement(By.CssSelector(".button__3eXSs")).Click();
-        Thread.Sleep(7000);
+        Thread.Sleep(10000);
+    }
+    
+    public bool IsLogin()
+    { 
+        return Driver.FindElements(By.Id("tl-bar-user")).Any();
     }
 }

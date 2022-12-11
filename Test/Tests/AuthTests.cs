@@ -13,5 +13,7 @@ public class AuthTests: TestBase
         
         App.NavigationHelper.OpenHomePage();
         App.AuthHelper.Login(account);
+
+        Assert.True(App.AuthHelper.IsLogin());
     }
 }
