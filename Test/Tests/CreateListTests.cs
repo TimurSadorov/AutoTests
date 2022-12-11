@@ -11,6 +11,11 @@ public class CreateListTests: TestBase
     [TestCaseSource(nameof(GenerateListData))]
     public void CreateList(ListData listData)
     {
+        var account = new AccountData("sadorov2001@mail.ru", "hk21002001");
+        
+        App.NavigationHelper.OpenHomePage();
+        App.AuthHelper.Login(account);
+        
         App.NavigationHelper.OpenCreateListForm();
         App.ListHelper.CreateList(listData);
         

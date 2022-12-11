@@ -31,5 +31,6 @@ public class NavigationHelper: HelperBase
     public void OpenHomePage()
     {
         Driver.Navigate().GoToUrl(_baseUrl);
+        Thread.Sleep(1000);
     }
 }
